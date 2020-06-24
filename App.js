@@ -1,8 +1,10 @@
-import React, {Component} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
-import {Asset} from 'expo-asset';
-import {AppLoading} from 'expo';
+import { Asset } from 'expo-asset';
+import { AppLoading } from 'expo';
+
+import DejimonApp from './app/index';
 
 function cacheImages(images) {
   return images.map(image => {
@@ -16,9 +18,9 @@ function cacheImages(images) {
 
 
 export default class App extends Component {
-  constructor(){
+  constructor() {
     super()
-    this.state={
+    this.state = {
       isReady: false
     }
   }
@@ -31,7 +33,7 @@ export default class App extends Component {
     await Promise.all([...imageAssets]);
   }
 
-  render(){
+  render() {
     if (!this.state.isReady) {
       return (
         <AppLoading
@@ -42,7 +44,11 @@ export default class App extends Component {
       );
     }
 
-    return<View/>
+    return (
+      <SafeAreaView style={styles.container}>
+        <DejimonApp/>
+      </SafeAreaView>
+    )
   }
 
 }
@@ -51,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
 });
